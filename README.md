@@ -38,4 +38,4 @@ O projeto segue a arquitetura MVC (Model-View-Controller), separando bem a lógi
 
 ** 🎓 Sobre
 
-Este projeto foi desenvolvido por Otavio Marcondes Ramalho como parte da disciplina Construção de Aplicações em Ambientes Virtuais de Análise e Desenvolvimento de Sistemas, com foco em práticas de interface gráfica, persistência de dados e organização em camadas.
+Este projeto foi desenvolvido por Otavio Marcondes Ramalho como parte da disciplina Construção de Aplicações em Ambientes Virtuais do curso de Análise e Desenvolvimento de Sistemas, com foco em práticas de interface gráfica, persistência de dados e organização em camadas.
