@@ -32,10 +32,10 @@ Todas as telas são funcionais e contam com **validações**:
 3. Configure a conexão com o MongoDB local (Compass) ou remoto (Atlas).
 4. Execute o projeto com: **python main.py**
 
-** 📂 Estrutura do Projeto
+## 📂 Estrutura do Projeto
 
 O projeto segue a arquitetura MVC (Model-View-Controller), separando bem a lógica de controle, as telas (views) e os dados.
 
-** 🎓 Sobre
+## 🎓 Sobre
 
 Este projeto foi desenvolvido por Otavio Marcondes Ramalho como parte da disciplina Construção de Aplicações em Ambientes Virtuais do curso de Análise e Desenvolvimento de Sistemas, com foco em práticas de interface gráfica, persistência de dados e organização em camadas.
