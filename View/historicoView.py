@@ -1,9 +1,9 @@
 import tkinter as tk
 
 class Historico:
-    def __init__(self, root, controller):
+    def __init__(self, root, view_controller):
         self.root = root
-        self.controller = controller
+        self.view_controller = view_controller
         self.frame = tk.Frame(self.root) # Frame principal
 
         tk.Label(self.frame, text="Histórico", font=("Arial", 16)).pack(pady=10)
@@ -13,7 +13,7 @@ class Historico:
         self.frm_lista.pack(padx=10, pady=5)
 
         # Botão Voltar
-        tk.Button(self.frame, text="Voltar", command=self.controller.voltar_inicio).pack(pady=5)
+        tk.Button(self.frame, text="Voltar", command=self.view_controller.ir_inicio).pack(pady=5)
 
     def mostrar(self):
         self.frame.pack()

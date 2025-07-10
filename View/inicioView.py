@@ -10,10 +10,10 @@ class Inicio:
         tk.Label(self.frame, text="Loja de Jogos", font=("Arial", 20)).pack(pady=10)
 
         # Botões da Tela do Inicio
-        tk.Button(self.frame, text="Ir ás compras", command=self.controller.mostrar_catalogo).pack(pady=5)
-        tk.Button(self.frame, text="Ver histórico", command=self.controller.mostrar_historico).pack(pady=5)
-        tk.Button(self.frame, text="Adicionar Jogos", command=self.controller.mostrar_adicao).pack(pady=5)
-        tk.Button(self.frame, text="Adicionar/Ver Saldo", command=self.controller.mostrar_saldo).pack(pady=5)
+        tk.Button(self.frame, text="Ir ás compras", command=self.controller.ir_catalogo).pack(pady=5)
+        tk.Button(self.frame, text="Ver histórico", command=self.controller.ir_historico).pack(pady=5)
+        tk.Button(self.frame, text="Adicionar Jogos", command=self.controller.ir_adicao_jogo).pack(pady=5)
+        tk.Button(self.frame, text="Adicionar/Ver Saldo", command=self.controller.ir_saldo).pack(pady=5)
         tk.Button(self.frame, text="Sair", command=self.root.quit).pack(pady=10)
 
     # Exibe a tela

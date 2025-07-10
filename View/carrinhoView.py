@@ -1,11 +1,9 @@
 import tkinter as tk
-from tkinter import messagebox
-
 
 class Carrinho:
-    def __init__(self, root, controller):
+    def __init__(self, root, view_controller):
         self.root = root
-        self.controller = controller
+        self.view_controller = view_controller
         self.frame = tk.Frame(self.root) # Frame Principal
 
         tk.Label(self.frame, text="Carrinho", font=("Arial", 16)).pack(pady=10)
@@ -19,8 +17,8 @@ class Carrinho:
         self.lbl_total.pack(pady=10)
 
         # Botões de ação de carrinho
-        tk.Button(self.frame, text="Finalizar Compra", command=self.finalizar_compra).pack(pady=5)
-        tk.Button(self.frame, text="Voltar ao Catálogo", command=self.controller.mostrar_catalogo).pack(pady=5)
+        tk.Button(self.frame, text="Finalizar Compra", command=self.view_controller.processo_finalizacao_carrinho).pack(pady=5)
+        tk.Button(self.frame, text="Voltar ao Catálogo", command=self.view_controller.ir_catalogo).pack(pady=5)
 
     # Exibe a tela
     def mostrar(self):
@@ -41,14 +39,6 @@ class Carrinho:
             frm_item.pack(pady=2, fill=tk.X)
 
             tk.Label(frm_item, text=txt).pack(side=tk.LEFT)
-            tk.Button(frm_item, text="Remover Jogo", command=lambda j=item: self.controller.remover_produto(j)).pack(side=tk.RIGHT)
+            tk.Button(frm_item, text="Remover Jogo", command=lambda j=item: self.view_controller.processo_remocao_produto(j)).pack(side=tk.RIGHT)
 
         self.lbl_total.config(text=f"Total: R$ {total:.2f}")
-
-    def finalizar_compra(self):
-        sucesso, mensagem = self.controller.finalizar_carrinho()
-        if sucesso:
-            messagebox.showinfo("Carrinho Finalizado!", mensagem)
-            self.controller.mostrar_carrinho()
-        else:
-            messagebox.showerror("Erro na compra!", mensagem)

@@ -1,11 +1,9 @@
 import tkinter as tk
-from tkinter import messagebox
-
 
 class Saldo:
-    def __init__(self, root, controller):
+    def __init__(self, root, view_controller):
         self.root = root
-        self.controller = controller
+        self.view_controller = view_controller
         self.frame = tk.Frame(self.root) # Frame principal
 
         tk.Label(self.frame, text="Saldo", font=("Arial", 16)).pack(pady=10)
@@ -25,8 +23,8 @@ class Saldo:
         tk.Radiobutton(self.frame, text="Cartão", variable=self.forma_pagamento, value="Cartão").pack(anchor="w", padx=10)
 
         # Botões
-        tk.Button(self.frame, text="Adicionar Saldo", command=self.adicao_saldo).pack(pady=5)
-        tk.Button(self.frame, text="Voltar", command=self.controller.voltar_inicio).pack(pady=5)
+        tk.Button(self.frame, text="Adicionar Saldo", command=self.processo_adicao_saldo).pack(pady=5)
+        tk.Button(self.frame, text="Voltar", command=self.view_controller.ir_inicio).pack(pady=5)
 
     # Exibe a tela
     def mostrar(self):
@@ -39,15 +37,8 @@ class Saldo:
     def atualizar(self, saldo):
         self.lbl_saldo.config(text=f"Saldo atual: R$ {saldo:.2f}")
 
-    def limpar(self):
-        self.valor.delete(0, tk.END)
-
-    def adicao_saldo(self):
+    def processo_adicao_saldo(self):
         valor = self.valor.get()
         forma = self.forma_pagamento.get()
-        sucesso, mensagem = self.controller.adicao_saldo(valor, forma)
-        if sucesso:
-            messagebox.showinfo("Saldo", mensagem)
-            self.controller.voltar_inicio()
-        else:
-            messagebox.showerror("Saldo", mensagem)
+        # View chama a view principal (TkInterView), que chama o Controller
+        self.view_controller.processo_adicao_saldo(valor, forma)

@@ -5,7 +5,7 @@ class Mongo:
     def __init__(self):
         try:
             # Conecta ao servidor do DB
-            self.cliente = MongoClient("mongodb+srv://Otavio:123admin123@lojadejogos.rvox2pj.mongodb.net/?retryWrites=true&w=majority&appName=LojaDeJogos")
+            self.cliente = MongoClient("mongodb://localhost:27017")
             self.mongo = self.cliente["LojaDeJogos"]
 
             # Define as coleções

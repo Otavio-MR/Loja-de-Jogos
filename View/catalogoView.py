@@ -1,11 +1,10 @@
 import tkinter as tk
-from tkinter import messagebox
 
 
 class Catalogo:
-    def __init__(self, root, controller):
+    def __init__(self, root, view_controller):
         self.root = root
-        self.controller = controller
+        self.view_controller = view_controller
         self.frame = tk.Frame(self.root) # Frame principal
         self.lbl_jogos = []
 
@@ -16,8 +15,8 @@ class Catalogo:
         self.frm_lista.pack()
 
         # Botões para acessar o carrinho
-        tk.Button(self.frame, text="Ver o Carrinho", command=self.controller.mostrar_carrinho).pack(pady=5)
-        tk.Button(self.frame, text="Voltar", command=self.controller.voltar_inicio).pack(pady=5)
+        tk.Button(self.frame, text="Ver o Carrinho", command=self.view_controller.ir_carrinho).pack(pady=5)
+        tk.Button(self.frame, text="Voltar", command=self.view_controller.ir_inicio).pack(pady=5)
 
     # Exibe a tela
     def mostrar(self):
@@ -41,9 +40,5 @@ class Catalogo:
             tk.Label(frm_jogo, text=txt).pack(side=tk.LEFT)
 
             # Botão de Adicionar no Carrinho
-            tk.Button(frm_jogo, text="Adicionar ao Carrinho", command=lambda j=jogo: self.add_feedback(j)).pack(side=tk.RIGHT)
-
-    def add_feedback(self, jogo):
-        self.controller.adicao_carrinho(jogo)
-        messagebox.showinfo("Carrinho", f"{jogo['nome']} adicionado ao carrinho!")
+            tk.Button(frm_jogo, text="Adicionar ao Carrinho", command=lambda j=jogo: self.view_controller.processo_adicao_carrinho(j)).pack(side=tk.RIGHT)
 

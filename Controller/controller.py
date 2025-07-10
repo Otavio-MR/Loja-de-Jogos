@@ -40,36 +40,38 @@ class Controller:
         historico = self.mongo.lista_historico()
         self.view.mostrar_tela_historico(historico)
 
-    # Função para adicionar um novo jogo ao banco
-    def adicionar_jogo(self, nome, genero, preco):
-        return self.jogo_model.criar_jogo(nome, genero, preco)
+    def processo_adicao_jogo(self, nome, genero, preco):
+        sucesso, mensagem = self.jogo_model.criar_jogo(nome, genero, preco)
+        if sucesso:
+            self.view.sucesso_adicao_jogo(mensagem)
+            self.ir_inicio()
+        else:
+            self.view.erro_adicao_jogo(mensagem)
 
-    def finalizar_carrinho(self):
-       return self.compra_model.finalizar_compra()
-
-    def adicao_saldo(self, valor, forma_pagamento):
+    def processo_adicao_saldo(self, valor, forma_pagamento):
         sucesso, mensagem = self.saldo_model.add_saldo(valor)
         if sucesso:
-            return True, f"{mensagem} via {forma_pagamento}"
-        return False, mensagem
+            mensagem_completa = f"{mensagem} via {forma_pagamento}"
+            self.view.sucesso_adicao_saldo(mensagem_completa)
+            self.ir_inicio
+        else:
+            self.view.erro_adicao_jogo(mensagem)
 
-    def adicao_carrinho(self, jogo):
+    def processo_adicao_carrinho(self, jogo):
         self.carrinho_model.add_produto(jogo)
-        return True, f"Jogo '{jogo['nome']}' adicionado com sucesso!"
+        self.view.sucesso_adicao_carrinho(jogo['nome'])
 
-    # Remove uma unidade de jogo no carrinho
-    def remover_produto(self, jogo):
+    def processo_remocao_produto(self, jogo):
         self.carrinho_model.remover(jogo)
-        return True, f"Jogo '{jogo['nome']}' removido com sucesso!"
+        self.ir_carrinho()
 
-    def obter_dados_carrinho(self):
-        return {
-            'produtos': self.carrinho_model.produtos,
-            'total': self.carrinho_model.calculo_total()
-        }
-
-    def obter_saldo(self):
-        return self.saldo_model.get_saldo()
+    def processo_finalizacao_compra(self):
+        sucesso, mensagem = self.compra_model.finalizar_compra()
+        if sucesso:
+            self.view_sucesso_compra(mensagem)
+            self.ir_carrinho()
+        else:
+            self.view.erro_compra(mensagem)
 
     def fechar_app(self):
         self.view.fechar_app()

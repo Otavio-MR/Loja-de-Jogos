@@ -1,11 +1,10 @@
 import tkinter as tk
-from tkinter import messagebox
 
 
 class AdicaoJogo(tk.Frame):
-    def __init__(self, root, controller):
+    def __init__(self, root, view_controller):
         self.root = root
-        self.controller = controller
+        self.view_controller = view_controller
         self.frame = tk.Frame(self.root) # Frame Principal
 
         tk.Label(self.frame, text="Adicionar Jogo", font=("Arial", 16)).pack(pady=10)
@@ -26,8 +25,8 @@ class AdicaoJogo(tk.Frame):
         self.preco.pack(padx=10, pady=5)
 
         # Botões
-        tk.Button(self.frame, text="Adicionar", command=self.adicionar_jogo).pack(pady=5)
-        tk.Button(self.frame, text="Voltar", command=self.controller.voltar_inicio).pack(pady=5)
+        tk.Button(self.frame, text="Adicionar", command=self.processo_adicao_jogo).pack(pady=5)
+        tk.Button(self.frame, text="Voltar", command=self.view_controller.ir_inicio).pack(pady=5)
 
     # Exibe a tela
     def mostrar(self):
@@ -42,13 +41,9 @@ class AdicaoJogo(tk.Frame):
         self.genero.delete(0, tk.END)
         self.preco.delete(0, tk.END)
 
-    def adicionar_jogo(self):
+    def processo_adicao_jogo(self):
         nome = self.nome.get()
         genero = self.genero.get()
         preco = self.preco.get()
-        sucesso, mensagem = self.controller.adicionar_jogo(nome, genero, preco)
-        if sucesso:
-            messagebox.showinfo("Sucesso", mensagem)
-            self.controller.voltar_inicio()
-        else:
-            messagebox.showerror("Erro", "Informações Inválidas!")
+        # View chama a view principal (TkInterView), que chama o Controller
+        self.view_controller.processo_adicao_saldo(nome, genero, preco)
